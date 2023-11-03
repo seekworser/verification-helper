@@ -11,6 +11,9 @@ from typing import *
 import onlinejudge_verify.languages.list
 import onlinejudge_verify.utils
 
+from logging import getLogger
+logger = getLogger(__name__)
+
 _error_timestamp = datetime.datetime.fromtimestamp(0, tz=datetime.timezone(datetime.timedelta()))
 
 
@@ -94,6 +97,10 @@ class VerificationMarker:
         self.new_timestamps = {}
 
         def load(path, timestamp):
+            logger.info(f"path: {path}")
+            logger.info(f"path.exists(): {path.exists()}")
+            logger.info(f"_error_timestamp: {_error_timestamp}")
+            logger.info(f"self.get_current_timestamp(path): {self.get_current_timestamp(path)}")
             if path.exists() and _error_timestamp < self.get_current_timestamp(path) <= timestamp:
                 self.mark_verified(path)
                 return
