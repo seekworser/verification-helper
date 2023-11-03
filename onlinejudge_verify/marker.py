@@ -163,7 +163,7 @@ def _get_last_commit_time_to_verify(path: pathlib.Path) -> datetime.datetime:
         traceback.print_exc()
         return _error_timestamp
     code = ['git', 'log', '-1', '--date=iso', '--pretty=%ad', '--'] + list(map(str, depending_files))
-    print(f"{subprocess.check_output(code).decode()}")
+    logger.info(f"{subprocess.check_output(code).decode()}")
     timestamp = subprocess.check_output(code).decode().strip()
     if not timestamp:
         return _error_timestamp
