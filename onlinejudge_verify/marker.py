@@ -101,7 +101,9 @@ class VerificationMarker:
             logger.info(f"path.exists(): {path.exists()}")
             logger.info(f"_error_timestamp: {_error_timestamp}")
             logger.info(f"self.get_current_timestamp(path): {self.get_current_timestamp(path)}")
+            logger.info(f"timestamp: {timestamp}")
             if path.exists() and _error_timestamp < self.get_current_timestamp(path) <= timestamp:
+                logger.info("verified")
                 self.mark_verified(path)
                 return
             #「そもそもテストを実行していない」のか「実行した上で失敗した」のか区別できないが、verifyできてない事には変わりないので一旦はfailedとみなす
